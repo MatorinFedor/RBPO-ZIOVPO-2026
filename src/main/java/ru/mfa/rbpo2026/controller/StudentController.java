@@ -1,54 +1,46 @@
 package ru.mfa.rbpo2026.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.mfa.rbpo2026.entity.Student;
+import ru.mfa.rbpo2026.dto.StudentCreateRequest;
+import ru.mfa.rbpo2026.dto.StudentDto;
 import ru.mfa.rbpo2026.service.StudentService;
 
+import java.util.List;
 import java.util.UUID;
 
-import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping(value = "/students", produces = APPLICATION_JSON_VALUE)
+@RequestMapping("/students")
 @RequiredArgsConstructor
 public class StudentController {
-
-    private final StudentService studentService;
+    private final StudentService service;
 
     @GetMapping
-    public ResponseEntity<Student> getStudent(
-            @RequestParam String name,
-            @RequestHeader(value = "X-Request-id", required = false) String requestId
-    ) {
-        System.out.println(requestId);
+    public ResponseEntity<List<StudentDto>> find(@RequestParam("name") String name) {
+        return ResponseEntity.ok(service.findByName(name));
+    }
 
-        var student = studentService.getStudent(name);
-        if (student == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-        var headers = new HttpHeaders();
-        headers.add("X-Request-id", UUID.randomUUID().toString());
-
-        return ResponseEntity.ok()
-                .headers(headers)
-                .body(student);
+    @GetMapping("/{id}")
+    public ResponseEntity<StudentDto> get(@PathVariable UUID id) {
+        return ResponseEntity.ok(service.get(id));
     }
 
     @PostMapping
-    public ResponseEntity<Void> addStudent(@RequestBody Student student) {
-        studentService.addStudent(student);
-        return ResponseEntity.status(CREATED).build();
+    public ResponseEntity<StudentDto> create(@RequestBody StudentCreateRequest dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(dto));
     }
 
-    @DeleteMapping("/by-name/{name}")
-    public ResponseEntity<Void> deleteStudent(@PathVariable String name) {
-        studentService.deleteStudent(name);
+    @PutMapping("/{id}/group/{groupId}")
+    public ResponseEntity<StudentDto> move(@PathVariable UUID id, @PathVariable UUID groupId) {
+        return ResponseEntity.ok(service.moveToGroup(id, groupId));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+        service.delete(id);
         return ResponseEntity.noContent().build();
     }
 

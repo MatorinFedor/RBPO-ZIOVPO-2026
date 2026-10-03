@@ -1,3 +1,10 @@
 spring:
   application:
     name: rbpo-2026
+  datasource:
+    url: jdbc:postgresql://localhost:5432/rbpo_2026
+    username: ${PG_SERVICE_USER}
+    password: ${PG_SERVICE_PASS}
+  sql:
+    init:
+      mode: never
