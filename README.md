@@ -36,8 +36,9 @@
 * [Транзакции](https://docs.spring.io/spring-data/jpa/reference/jpa/transactions.html)
 * [Курс и шпаргалка по SQL](https://proglib.io/p/sql-cheat-sheet)
 * [pgAdmin: параметры подключения](https://www.pgadmin.org/docs/pgadmin4/latest/server_dialog.html)
-- [PostgreSQL: права и владение](https://www.postgresql.org/docs/current/ddl-priv.html)
-- [OWASP: предотвращение SQL-инъекций](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)
+* [PostgreSQL: права и владение](https://www.postgresql.org/docs/current/ddl-priv.html)
+* [OWASP: предотвращение SQL-инъекций](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)
+* [Download PostgreSQL](https://www.postgresql.org/download/)
 
 **Срок сдачи:**  
 БКС2403 - **17.10.2026**  
