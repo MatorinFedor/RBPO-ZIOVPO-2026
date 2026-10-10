@@ -1,0 +1,8 @@
+spring:
+  sql:
+    init:
+      mode: always
+      username: ${PG_OWNER_USER}
+      password: ${PG_OWNER_PASS}
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
