@@ -45,3 +45,17 @@
 **Срок сдачи:**  
 БКС2403 - **17.10.2026**  
 БКС2401, БКС2402, БАС2401, БАС2402 - **31.10.2026**  
+
+## [Задание 4. Аутентификация и авторизация в Spring Security](files/zadanie4.pdf)
+### Дополнительные материалы к заданию 4:
+* [Устройство Spring Security](https://docs.spring.io/spring-security/reference/servlet/architecture.html)
+* [Устройство аутентификации](https://docs.spring.io/spring-security/reference/servlet/authentication/architecture.html)
+* [Базовая аутентификация](https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/basic.html)
+* [Защита от CSRF](https://docs.spring.io/spring-security/reference/servlet/exploits/csrf.html)
+* [CSRF Prevention Cheat Sheet — OWASP](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)
+* [CORS и ограничения браузера](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS)
+* [Гайд по SpringSecurity на SpringIO](https://spring.io/guides/gs/securing-web)
+
+**Срок сдачи:**  
+БКС2403 - **31.10.2026**  
+БКС2401, БКС2402, БАС2401, БАС2402 - **07.11.2026**  
