@@ -7,16 +7,30 @@
   },
   "item": [
     {
-      "name": "БКС2403",
+      "name": "Запросы",
       "item": [
         {
           "name": "SaveStudent",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 201) {\r\n    pm.environment.set(\"studentId\", pm.response.json().id);\r\n}"
+                ]
+              }
+            }
+          ],
           "request": {
+            "auth": {
+              "type": "noauth"
+            },
             "method": "POST",
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"name\": \"Daria\",\r\n  \"email\": \"daria@example.com\",\r\n  \"groupId\": \"22222222-2222-2222-2222-222222222222\",\r\n  \"additionalCourseId\": \"aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa\",\r\n  \"studentNumber\": \"S-004\"\r\n}\r\n",
+              "raw": "{\r\n  \"name\": \"Security\",\r\n  \"email\": \"security@example.com\",\r\n  \"groupId\": \"22222222-2222-2222-2222-222222222222\",\r\n  \"additionalCourseId\": \"aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa\",\r\n  \"studentNumber\": \"S-SEC-001\"\r\n}\r\n",
               "options": {
                 "raw": {
                   "language": "json"
@@ -38,6 +52,9 @@
         {
           "name": "GetStudent",
           "request": {
+            "auth": {
+              "type": "noauth"
+            },
             "method": "GET",
             "header": [
               {
@@ -66,6 +83,9 @@
         {
           "name": "StudentById",
           "request": {
+            "auth": {
+              "type": "noauth"
+            },
             "method": "DELETE",
             "header": [],
             "url": {
@@ -145,13 +165,13 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/courses/{{math}}",
+              "raw": "{{baseUrl}}/courses/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "courses",
-                "{{math}}"
+                "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
               ]
             }
           },
@@ -176,53 +196,48 @@
             }
           },
           "response": []
-        }
-      ]
-    },
-    {
-      "name": "БКС2401",
-      "item": [
+        },
         {
-          "name": "New Request",
+          "name": "GetCSRF",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"CSRF token received\", () => pm.response.status(200));\r\nif (pm.response.code === 200) {\r\n    pm.environment.set(\"csrfToken\", pm.response.json().token);\r\n} else {\r\n    pm.environment.unset(\"csrfToken\");\r\n}"
+                ]
+              }
+            }
+          ],
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "X-Request-ID",
-                "value": "qwedfghjmk"
-              }
-            ],
+            "header": [],
             "url": {
-              "raw": "{{baseUrl}}/students?name=student1",
+              "raw": "{{baseUrl}}/csrf-token",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
-                "students"
-              ],
-              "query": [
-                {
-                  "key": "name",
-                  "value": "student1"
-                }
+                "csrf-token"
               ]
             }
           },
           "response": []
         },
         {
-          "name": "New Request",
+          "name": "CreateUser",
           "request": {
             "method": "POST",
             "header": [
               {
-                "key": "X-Request-id",
-                "value": "qwertyuiosdfghjkl"
+                "key": "X-CSRF-TOKEN",
+                "value": "{{csrfToken}}"
               }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"name\": \"student1\",\r\n    \"email\": \"student1@mail.ru\"\r\n}",
+              "raw": "{\r\n    \"email\": \"admin@example.com\",\r\n    \"password\": \"pass\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -230,271 +245,12 @@
               }
             },
             "url": {
-              "raw": "{{baseUrl}}/students",
+              "raw": "{{baseUrl}}/users",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
-                "students"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "New Request",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/students/by-name/student1",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "students",
-                "by-name",
-                "student1"
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "БАС2402",
-      "item": [
-        {
-          "name": "New Request",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "X-Request-ID",
-                "value": "iytredcvbnmk"
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:8080/students?name=student1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "students"
-              ],
-              "query": [
-                {
-                  "key": "name",
-                  "value": "student1"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "New Request",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"name\": \"student1\",\r\n    \"email\": \"student1@mail.ru\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{baseUrl}}/students",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "students"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "New Request",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/students/by-name/student1",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "students",
-                "by-name",
-                "student1"
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "БКС2402",
-      "item": [
-        {
-          "name": "New Request",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "X-Request-ID",
-                "value": "oiuytrewsdfghjkl"
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:8080/students?name=student1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "students"
-              ],
-              "query": [
-                {
-                  "key": "name",
-                  "value": "student1"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "New Request",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"name\": \"student1\",\r\n    \"email\": \"student1@mail.ru\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{baseUrl}}/students",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "students"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "New Request",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/students/by-name/student1",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "students",
-                "by-name",
-                "student1"
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "БАС2401",
-      "item": [
-        {
-          "name": "New Request",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "X-Request-ID",
-                "value": "poiuytrewscvhjkl"
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:8080/students?name=Alice",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "students"
-              ],
-              "query": [
-                {
-                  "key": "name",
-                  "value": "Alice"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "New Request",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"name\": \"student1\",\r\n    \"email\": \"student1@mail.ru\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{baseUrl}}/students",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "students"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "New Request",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/students/by-name/student1",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "students",
-                "by-name",
-                "student1"
+                "users"
               ]
             }
           },
