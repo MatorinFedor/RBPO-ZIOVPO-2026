@@ -8,6 +8,9 @@ spring:
   sql:
     init:
       mode: never
+logging:
+  level:
+    org.springframework.security: DEBUG
   jpa:
     hibernate:
       ddl-auto: validate
