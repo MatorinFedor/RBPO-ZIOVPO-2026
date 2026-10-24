@@ -11,4 +11,7 @@ spring:
   sql:
     init:
       mode: never
+logging:
+  level:
+    org.springframework.security: DEBUG
 
