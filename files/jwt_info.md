@@ -286,16 +286,16 @@ Access используется для обращения к защищённы�
     <version>0.13.0</version>
 </dependency>
 <dependency>
-<groupId>io.jsonwebtoken</groupId>
-<artifactId>jjwt-impl</artifactId>
-<version>0.13.0</version>
-<scope>runtime</scope>
+  <groupId>io.jsonwebtoken</groupId>
+  <artifactId>jjwt-impl</artifactId>
+  <version>0.13.0</version>
+  <scope>runtime</scope>
 </dependency>
 <dependency>
-<groupId>io.jsonwebtoken</groupId>
-<artifactId>jjwt-jackson</artifactId>
-<version>0.13.0</version>
-<scope>runtime</scope>
+  <groupId>io.jsonwebtoken</groupId>
+  <artifactId>jjwt-jackson</artifactId>
+  <version>0.13.0</version>
+  <scope>runtime</scope>
 </dependency>
 ```
 
