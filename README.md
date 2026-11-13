@@ -72,3 +72,30 @@
 БКС2403 - **14.11.2026**  
 БКС2401, БКС2402, БАС2401, БАС2402 - **21.11.2026**
 
+## [Задание 6. Создание цепочки сертификатов и настройка HTTPS](files/zadanie6.pdf)
+
+* Внимательно ознакомьтесь с [теоретической частью](files/https_info.md)
+* [Корневой сертификат](files/course-root-ca.crt)
+* [Хранилище промежуточного CA](files/course-issuing-ca.p12) с закрытым ключом
+* Отпечатки SHA-256:
+  * Корневой CA `RBPO Root CA`
+  ```text
+  9A:D6:EC:24:B4:E6:18:A8:2C:4B:F7:E1:9C:8A:F3:F4:E0:22:68:03:A3:97:74:5C:98:79:F7:DC:06:11:36:DF
+  ```
+  * Промежуточный CA `RBPO Issuing CA`
+  ```text
+  CB:5A:38:65:37:04:ED:D8:FA:96:4E:89:7E:FE:53:C4:9C:BD:1B:5C:C4:E2:88:F3:73:0F:92:FB:FC:76:E6:7F
+  ```
+
+### Дополнительные материалы к заданию 6:
+
+* [Команда keytool](https://docs.oracle.com/en/java/javase/25/docs/specs/man/keytool.html)
+* [Выбор размеров ключей и сроков их использования, NIST SP 800-57](https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final)
+* [Сертификаты и ограничения центров сертификации, RFC 5280](https://www.rfc-editor.org/rfc/rfc5280.html)
+* [Протокол TLS 1.3, RFC 8446](https://www.rfc-editor.org/rfc/rfc8446.html)
+* [Настройка TLS в Spring Boot](https://docs.spring.io/spring-boot/how-to/webserver.html#howto.webserver.configure-ssl)
+
+**Срок сдачи:**  
+БКС2403 - **28.11.2026**  
+БКС2401, БКС2402, БАС2401, БАС2402 - **05.12.2026**
+
